@@ -1,7 +1,7 @@
 api.cfm
 =======
 
-An elegant, lightweight, almost-zero-install ColdFusion REST API.
+An elegant, lightweight, almost-zero-install ColdFusion RESTish API.
 -----------------------------------------------------------------
 
 By default it looks for CFCs in /service.  Change this in line 20 if desired.
