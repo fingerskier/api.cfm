@@ -16,3 +16,4 @@ So, an actual URL would look like this:
 Caveats:
 * You've got 'api.cfm' in your URL
 * Doesn't support named arguments
+* Doesn't support HTTP verbs

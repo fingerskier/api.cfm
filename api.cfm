@@ -1,9 +1,13 @@
 <cfparam name="application.api" default="#structNew()#">
 <cfif isDefined("URL.reset") and (reset is 'gooberfish')>
-	<cfset application.api = {}>
 </cfif>
+	<cfset application.api = {}>
 
 <cfset path = '#CGI.PATH_INFO#'>
+<cfparam name="callback" default="jsonp_callback">
+
+<cfparam name="application.APIlog" default="#arrayNew(1 )#">
+<cfset arrayAppend(application.APIlog, path)>
 
 <cfif listLen(path, '/') lt 2>
 	{"error":"Malformed API Call"}
@@ -43,4 +47,9 @@
 	</cfloop>
 </cfinvoke>
 
-<cfoutput>#serializeJSON(result)#</cfoutput>
+<cfif isDefined("result.error")>
+	<cfheader statuscode="404" statustext="#result.error#">
+<cfelse>
+	<cfheader name="Content-Type" value="application/json">
+	<cfoutput>#callback#(#serializeJSON(result)#)</cfoutput>
+</cfif>
