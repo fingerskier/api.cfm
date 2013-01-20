@@ -28,16 +28,19 @@
 	<cfset fn = application.api[component][method]>
 <cfelse>
 	{"error":"Invalid API Branch"}
+	<cfabort>
 </cfif>
 
 <cfset fnInfo = getMetadata(fn)>
 
 <cfif not fnInfo.access is "remote">
 	{"error":"Invalid API Call"}
+	<cfabort>
 </cfif>
 
 <cfif arrayLen(args) gt arrayLen(fnInfo.parameters)>
 	{"error":"Invalid Number of Arguments"}
+	<cfabort>
 </cfif>
 
 <cfset I = 0>
